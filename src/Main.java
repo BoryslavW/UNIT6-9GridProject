@@ -1,3 +1,3 @@
 public class Main {
-    //initial commit
+    //initial commit to github
 }
