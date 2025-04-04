@@ -23,22 +23,19 @@ public class Enemy extends Sprite {
                 spacelist.add(add);
                 add -= 9;
             }
-        }
-        else if (direction == 2) {
+        } else if (direction == 2) {
             int add = space;
-            while (add < 81 && ) {   // use the opposite minus
+            while (add < 81 &&) {   // use the opposite minus
                 spacelist.add(add);                  // makes no sence
                 add -= 9;
             }
-        }
-        else if (direction == 3) {
+        } else if (direction == 3) {
             int add = space;
             while (add < 81) {
                 spacelist.add(add);
                 add += 9;
             }
-        }
-        else if (direction == 4) {
+        } else if (direction == 4) {
 
         }
         ArrayList yup = new ArrayList<Integer>();
@@ -46,6 +43,25 @@ public class Enemy extends Sprite {
         return yup;
     }
 
+    public static int getY(int which) {
+        if (which == 1) {
+            return (int) (Math.random() * 9) + 1;
+        } else if (which == 2) {
+            return (int) (Math.random() * 9) + 10;
+        } else {
+            return (int) (Math.random() * 9) + 19;
+        }
+    }
+
+    public static int getX(int which) {
+        if (which == 1) {
+            return (int) (Math.random() * 9) + 1;
+        } else if (which == 2) {
+            return (int) (Math.random() * 9) + 10;
+        } else {
+            return (int) (Math.random() * 9) + 19;
+        }
+    }
 }
 
 /*

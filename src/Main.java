@@ -5,17 +5,10 @@ public class Main {
     //main menu offers a start button or an end button
     // write a start menu method so that you can re-use it after each time a player fails
 
-    Sprite[][] grid = new Sprite[9][9];
+    Grid grid = new Grid();
     Player guy = new Player();
-    boolean gameEnd = false;
-
-    grid[4][4] = guy;
-
-    for (int i = 0; i < 9; i++) {
-        for (int j = 0; j < 9; j++) {
-            grid[i][j] = new Sprite();
-        }
-    }
+    Boolean gameEnd = false;
+    int waves = 0;
 
     while(guy.living() && !gameEnd) {
         //fix these nums cuz the grids start from 0
@@ -23,18 +16,21 @@ public class Main {
         int rand2 = 27 + (int) (Math.random() * 27);
         int rand3 = 54 + (int) (Math.random() * 27);
 
+        // use the static enemy methods to create the mcguffin
+
+        // the mcguffin will just be a spot where the player has to reach to de-spawn the enemies per wave
+
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if () {
+                if (true) {
 
                 }
-                else {
-                    grid[i][j] = new Sprite();
+                else if (true) {
+
                 }
             }
         }
         //repaint
-
     }
 
 
