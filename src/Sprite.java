@@ -8,7 +8,9 @@ public class Sprite {
         // sets image to red square
     }
 
+    public void highlight() {
+        //add the visual to turn highlighted
+    }
 
 
-    // image file for the grid that will be overwritten
 }

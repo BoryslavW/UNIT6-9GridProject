@@ -9,12 +9,12 @@ public class Enemy extends Sprite {
     // 3 south
     // 4 west
 
-    public void Enemy(int d, int space) {
+    public void Enemy() {
         direction = d;
         this.space = space;
     }
 
-    public ArrayList face() {
+    public ArrayList<Integer> face() {
         //algorithm for figuring out which spaces it will turn red based of space and direction
         ArrayList<Integer> spacelist = new ArrayList<>();
         if (direction == 1) {
@@ -24,10 +24,28 @@ public class Enemy extends Sprite {
                 add -= 9;
             }
         } else if (direction == 2) {
+            int limit = 0;
+            if (space > 71) {
+                limit = 80;
+            } if (space > 62) {
+                limit = 71;
+            } if (space > 53) {
+                limit = 62;
+            } if (space > 44) {
+                limit = 53;
+            } if (space > 35) {
+                limit = 44;
+            } if (space > 26) {
+                limit = 35;
+            } if (space > 17) {
+                limit = 26;
+            }if (space > 8) {
+                limit = 17;
+            }
             int add = space;
-            while (add < 81 &&) {   // use the opposite minus
+            while (add < 81 && ) {   // use the opposite minus
                 spacelist.add(add);                  // makes no sence
-                add -= 9;
+                add ++;
             }
         } else if (direction == 3) {
             int add = space;
@@ -36,7 +54,31 @@ public class Enemy extends Sprite {
                 add += 9;
             }
         } else if (direction == 4) {
-
+            int limit = 0;
+            if (space > 71) {
+                limit = 72;
+            } else if (space > 62) {
+                limit = 63;
+            } else if (space > 53) {
+                limit = 54;
+            } else if (space > 44) {
+                limit = 45;
+            } else if (space > 35) {
+                limit = 36;
+            } else if (space > 26) {
+                limit = 27;
+            } else if (space > 17) {
+                limit = 18;
+            } else if (space > 8) {
+                limit = 9;
+            } else {
+                limit = 0;
+            }
+            int add = space;
+            while (add >= limit) {
+                spacelist.add(add);
+                add -= 1;
+            }
         }
         ArrayList yup = new ArrayList<Integer>();
         // a mini boss enemy with direction 0 would go in all 4 directions
@@ -62,6 +104,7 @@ public class Enemy extends Sprite {
             return (int) (Math.random() * 9) + 19;
         }
     }
+
 }
 
 /*

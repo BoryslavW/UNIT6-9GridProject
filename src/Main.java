@@ -7,30 +7,22 @@ public class Main {
 
     Grid grid = new Grid();
     Player guy = new Player();
+    grid.setPlayer(4,4, guy);
     Boolean gameEnd = false;
     int waves = 0;
+    Enemy en1 = new Enemy();
+    Enemy en2 = new Enemy();
+    Enemy en3 = new Enemy();
 
     while(guy.living() && !gameEnd) {
-        //fix these nums cuz the grids start from 0
         int rand1 = (int) (Math.random() * 27);
+        int direct1 = (int) (Math.random() * 4) + 1;
         int rand2 = 27 + (int) (Math.random() * 27);
+        int direct2 = (int) (Math.random() * 4) + 1;
         int rand3 = 54 + (int) (Math.random() * 27);
+        int direct3 = (int) (Math.random() * 4) + 1;
 
-        // use the static enemy methods to create the mcguffin
 
-        // the mcguffin will just be a spot where the player has to reach to de-spawn the enemies per wave
-
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (true) {
-
-                }
-                else if (true) {
-
-                }
-            }
-        }
-        //repaint
     }
 
 
