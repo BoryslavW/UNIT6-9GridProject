@@ -1,7 +1,6 @@
 public class Player extends Sprite {
     private int x, y;
     private boolean alive;
-
     public Player() {
         x = 4;
         y = 4;
@@ -9,7 +8,9 @@ public class Player extends Sprite {
     }
 
     public void move(String way, Grid grid) {
-        int newX = x, newY = y;
+        int newX = x;
+        int newY = y;
+
         if (way.equals("w")) newY--;
         else if (way.equals("a")) newX--;
         else if (way.equals("s")) newY++;
@@ -19,7 +20,7 @@ public class Player extends Sprite {
             grid.movePlayer(x, y, newX, newY);
             x = newX;
             y = newY;
-            if (grid.getSprite(newX, newY).isRed()) {
+            if (grid.getSprite(newX, newY).isHighlighted()) {
                 alive = false;
             }
         }

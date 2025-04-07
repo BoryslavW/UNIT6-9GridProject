@@ -8,13 +8,15 @@ public class Main {
         java.util.Scanner scanner = new java.util.Scanner(System.in);
 
         while (player.living() && turns < 9) {
-            grid.print(); // Show state
+            grid.addEnemy1();
+            grid.addEnemy2();
+            grid.addEnemy3();
+            grid.print();
             System.out.print("Move (w/a/s/d): ");
             String move = scanner.nextLine();
             player.move(move, grid);
-
-            grid.updateEnemies();
-            turns++;
+            //highlighted turn red
+            // new enemies spawn highlights already appearing
             if (!player.living()) {
                 System.out.println("Game Over! Hit a red space.");
                 break;
@@ -22,6 +24,8 @@ public class Main {
             if (turns == 9) {
                 System.out.println("You Win! Survived 9 turns.");
             }
+            grid.flush();
+            turns++;
         }
         scanner.close();
     }

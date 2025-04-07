@@ -1,8 +1,19 @@
 public class Sprite {
     boolean isRed = false;
+    boolean high = false;
 
-    public void setRed(boolean red) {
-        this.isRed = red;
+    public void setRed() {
+        isRed = true;
+        high = false;
+    }
+
+    public void setHighlighted() {
+        high = true;
+        isRed = false;
+    }
+
+    public boolean isHighlighted() {
+        return high;
     }
 
     public boolean isRed() {

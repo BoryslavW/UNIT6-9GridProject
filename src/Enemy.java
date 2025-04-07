@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 
 public class Enemy extends Sprite {
-    private int x, y;
+    private int x;
+    private int y;
     private int direction; // 1=north, 2=east, 3=south, 4=west
 
     public Enemy(int x, int y, int direction) {
@@ -10,26 +11,35 @@ public class Enemy extends Sprite {
         this.direction = direction;
     }
 
+    @Override
+    public void setRed() {
+        // turns it into the burning image
+    }
+
     public void highlight(Grid grid) {
-        int pos = y * 9 + x;
-        if (direction == 1) { // North
-            for (int i = pos; i >= 0; i -= 9) {
-                grid.highlight(i % 9, i / 9);
+        // For a 9x9 grid with valid indices 0 through 8.
+        if (direction == 1) { // Facing downwards
+            for (int i = x + 1; i < 9; i++) {
+                grid.setHighlighted(i, y);
             }
-        } else if (direction == 2) { // East
-            for (int i = x; i < 9; i++) {
-                grid.highlight(i, y);
+        }
+        if (direction == 2) { // Facing upwards
+            for (int i = x - 1; i >= 0; i--) {
+                grid.setHighlighted(i, y);
             }
-        } else if (direction == 3) { // South
-            for (int i = pos; i < 81; i += 9) {
-                grid.highlight(i % 9, i / 9);
+        }
+        if (direction == 3) { // Facing rightwards
+            for (int i = y + 1; i < 9; i++) {
+                grid.setHighlighted(x, i);
             }
-        } else if (direction == 4) { // West
-            for (int i = x; i >= 0; i--) {
-                grid.highlight(i, y);
+        }
+        if (direction == 4) { // Facing leftwards
+            for (int i = y - 1; i >= 0; i--) {
+                grid.setHighlighted(x, i);
             }
         }
     }
+
 
     public int getX() { return x; }
     public int getY() { return y; }
