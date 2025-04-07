@@ -8,6 +8,7 @@ public class Player extends Sprite {
     }
 
     public void move(String way, Grid grid) {
+
         int newX = x;
         int newY = y;
 
@@ -15,6 +16,9 @@ public class Player extends Sprite {
         else if (way.equals("a")) newX--;
         else if (way.equals("s")) newY++;
         else if (way.equals("d")) newX++;
+        if (grid.getSprite(newX, newY).isHighlighted()) {
+            alive = false;
+        }
 
         if (newX >= 0 && newX < 9 && newY >= 0 && newY < 9) {
             grid.movePlayer(x, y, newX, newY);
