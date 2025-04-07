@@ -1,20 +1,52 @@
 import java.util.ArrayList;
 
 public class Enemy extends Sprite {
-    int direction;
-    int space;
+    private int x, y;
+    private int direction; // 1=north, 2=east, 3=south, 4=west
 
-    // 1 north
-    // 2 east
-    // 3 south
-    // 4 west
-
-    public void Enemy() {
-        direction = d;
-        this.space = space;
+    public Enemy(int x, int y, int direction) {
+        this.x = x;
+        this.y = y;
+        this.direction = direction;
     }
 
-    public ArrayList<Integer> face() {
+    public void highlight(Grid grid) {
+        int pos = y * 9 + x;
+        if (direction == 1) { // North
+            for (int i = pos; i >= 0; i -= 9) {
+                grid.highlight(i % 9, i / 9);
+            }
+        } else if (direction == 2) { // East
+            for (int i = x; i < 9; i++) {
+                grid.highlight(i, y);
+            }
+        } else if (direction == 3) { // South
+            for (int i = pos; i < 81; i += 9) {
+                grid.highlight(i % 9, i / 9);
+            }
+        } else if (direction == 4) { // West
+            for (int i = x; i >= 0; i--) {
+                grid.highlight(i, y);
+            }
+        }
+    }
+
+    public int getX() { return x; }
+    public int getY() { return y; }
+}
+
+/*
+    0  1  2  3  4  5  6  7  8
+    9  10 11 12 13 14 15 16 17
+    18 19 20 21 22 23 24 25 26
+    27 28 29 30 31 32 33 34 35
+    36 37 38 39 40 41 42 43 44
+    45 46 47 48 49 50 51 52 53
+    54 55 56 57 58 59 60 61 62
+    63 64 65 66 67 68 69 70 71
+    72 73 74 75 76 77 78 79 80
+
+public ArrayList<Integer> face() {
         //algorithm for figuring out which spaces it will turn red based of space and direction
         ArrayList<Integer> spacelist = new ArrayList<>();
         if (direction == 1) {
@@ -84,38 +116,4 @@ public class Enemy extends Sprite {
         // a mini boss enemy with direction 0 would go in all 4 directions
         return yup;
     }
-
-    public static int getY(int which) {
-        if (which == 1) {
-            return (int) (Math.random() * 9) + 1;
-        } else if (which == 2) {
-            return (int) (Math.random() * 9) + 10;
-        } else {
-            return (int) (Math.random() * 9) + 19;
-        }
-    }
-
-    public static int getX(int which) {
-        if (which == 1) {
-            return (int) (Math.random() * 9) + 1;
-        } else if (which == 2) {
-            return (int) (Math.random() * 9) + 10;
-        } else {
-            return (int) (Math.random() * 9) + 19;
-        }
-    }
-
-}
-
-/*
-    0  1  2  3  4  5  6  7  8
-    9  10 11 12 13 14 15 16 17
-    18 19 20 21 22 23 24 25 26
-    27 28 29 30 31 32 33 34 35
-    36 37 38 39 40 41 42 43 44
-    45 46 47 48 49 50 51 52 53
-    54 55 56 57 58 59 60 61 62
-    63 64 65 66 67 68 69 70 71
-    72 73 74 75 76 77 78 79 80
-
  */

@@ -1,46 +1,37 @@
 public class Player extends Sprite {
+    private int x, y;
     private boolean alive;
-    private int x;
-    private int y;
 
     public Player() {
-        alive = true;
         x = 4;
         y = 4;
+        alive = true;
     }
 
-    public void gameOver() {
-        alive = false;
-    }
+    public void move(String way, Grid grid) {
+        int newX = x, newY = y;
+        if (way.equals("w")) newY--;
+        else if (way.equals("a")) newX--;
+        else if (way.equals("s")) newY++;
+        else if (way.equals("d")) newX++;
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void move(String way) {
-        if (way.equals("w")) {
-            y -= 1;
-        }
-        else if (way.equals("a")) {
-            x -= 1;
-        }
-        else if (way.equals("s")) {
-            y++;
-        }
-        else if (way.equals("d")) {
-            x++;
+        if (newX >= 0 && newX < 9 && newY >= 0 && newY < 9) {
+            grid.movePlayer(x, y, newX, newY);
+            x = newX;
+            y = newY;
+            if (grid.getSprite(newX, newY).isRed()) {
+                alive = false;
+            }
         }
         else {
-            System.out.println("Real smart, you didn't move at all");
+            System.out.println("Real smart, you stayed still.");
         }
     }
-
 
     public boolean living() {
         return alive;
     }
+
+    public int getX() { return x; }
+    public int getY() { return y; }
 }

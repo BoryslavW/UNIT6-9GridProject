@@ -1,16 +1,11 @@
 public class Sprite {
+    boolean isRed = false;
 
-    public Sprite() {
-        // image file for the grid that will be overwritten
+    public void setRed(boolean red) {
+        this.isRed = red;
     }
 
-    public void red(boolean hit) {
-        // sets image to red square
+    public boolean isRed() {
+        return isRed;
     }
-
-    public void highlight() {
-        //add the visual to turn highlighted
-    }
-
-
 }

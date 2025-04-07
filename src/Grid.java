@@ -1,73 +1,83 @@
 import java.util.ArrayList;
 
 public class Grid {
-    Sprite[][] yup;
-    ArrayList<Integer> cooked = new ArrayList<>();
+    private Sprite[][] grid = new Sprite[9][9];
+    private Enemy[] enemies = new Enemy[3]; // Simple fixed array
+    private int enemyCount = 3;
 
-    public Grid () {
-        yup = new Sprite[9][9];
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                yup[i][j] = new Sprite();
+    public Grid() {
+        for (int y = 0; y < 9; y++) {
+            for (int x = 0; x < 9; x++) {
+                grid[x][y] = new Sprite();
             }
+        }
+        enemies[0] = new Enemy(0, 0, 2); // East
+        enemies[1] = new Enemy(8, 0, 4); // West
+        enemies[2] = new Enemy(4, 8, 1); // North
+        for (int i = 0; i < enemyCount; i++) {
+            grid[enemies[i].getX()][enemies[i].getY()] = enemies[i];
         }
     }
 
-    public void highlight() {
-        int count = 0;
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (cooked.contains(count)) {
-                    yup[i][j].highlight();
-                }
-                count++;
-            }
+    public void setPlayer(int x, int y, Player player) {
+        grid[x][y] = player;
+    }
+
+    public void movePlayer(int oldX, int oldY, int newX, int newY) {
+        grid[oldX][oldY] = new Sprite();
+        grid[newX][newY] = grid[oldX][oldY]; // Temp swap
+        grid[oldX][oldY] = new Sprite();
+        grid[newX][newY] = (Player) grid[newX][newY]; // Player moves
+    }
+
+    public void highlight(int x, int y) {
+        if (!(grid[x][y] instanceof Enemy) && !(grid[x][y] instanceof Player)) {
+            grid[x][y].setRed(true); // Highlight only if not occupied
         }
     }
 
-    public void burn() {
-        int count = 0;
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (cooked.contains(count) && yup[i][j] instanceof Player) {
-                    ((Player) yup[i][j]).gameOver();
-                }
-                count++;
-            }
-        }
-    }
-
-    /*
-    0  1  2  3  4  5  6  7  8
-    9  10 11 12 13 14 15 16 17
-    18 19 20 21 22 23 24 25 26
-    27 28 29 30 31 32 33 34 35
-    36 37 38 39 40 41 42 43 44
-    45 46 47 48 49 50 51 52 53
-    54 55 56 57 58 59 60 61 62
-    63 64 65 66 67 68 69 70 71
-    72 73 74 75 76 77 78 79 80
-
- */
-
-    public void setPlayer(int x, int y, Player add) {
-        yup[x][y] = add;
-    }
-
-    public void moveplayer(int x, int y, Player again) {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (yup[i][j] instanceof Player) {
-                    yup[i][j] = new Sprite();
+    public void updateEnemies() {
+        // Turn current highlights red
+        for (int y = 0; y < 9; y++) {
+            for (int x = 0; x < 9; x++) {
+                if (grid[x][y].isRed()) {
+                    grid[x][y].setRed(true);
                 }
             }
         }
-        setPlayer(x, y, again);
+        // New highlights
+        for (int i = 0; i < enemyCount; i++) {
+            if (enemies[i] != null) {
+                enemies[i].highlight(this);
+            }
+        }
+        // Remove one enemy
+        if (enemyCount > 0) {
+            for (int i = 0; i < enemyCount; i++) {
+                if (enemies[i] != null) {
+                    grid[enemies[i].getX()][enemies[i].getY()] = new Sprite();
+                    enemies[i] = null;
+                    enemyCount--;
+                    break; // Remove first non-null enemy
+                }
+            }
+        }
     }
 
-    public void setEnemy(int x, int y, Enemy add) {
-        for (int i = 0; i < add.face().size(); i++) {
-            cooked.add(add.face().get(i));
+    public Sprite getSprite(int x, int y) {
+        return grid[x][y];
+    }
+
+    public void print() {
+        for (int y = 0; y < 9; y++) {
+            for (int x = 0; x < 9; x++) {
+                if (grid[x][y] instanceof Player) System.out.print("P ");
+                else if (grid[x][y] instanceof Enemy) System.out.print("E ");
+                else if (grid[x][y].isRed()) System.out.print("R ");
+                else System.out.print(". ");
+            }
+            System.out.println();
         }
+        System.out.println();
     }
 }
