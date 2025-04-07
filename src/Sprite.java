@@ -11,7 +11,7 @@ public class Sprite {
         high = true;
         isRed = false;
     }
-    public void unhilight() {
+    public void unHilight() {
         high = false;
     }
 

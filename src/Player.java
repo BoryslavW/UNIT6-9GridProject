@@ -9,8 +9,8 @@ public class Player extends Sprite {
 
     public void move(String way, Grid grid) {
 
-int oldX = x;
-int oldY = y;
+        int oldX = x;
+        int oldY = y;
         int newX = x;
         int newY = y;
 
@@ -22,7 +22,7 @@ int oldY = y;
             alive = false;
         }
         else {
-            this.unhilight();
+            this.unHilight();
             grid.setHighlighted(oldX, oldY);
         }
 

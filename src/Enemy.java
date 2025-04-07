@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Enemy extends Sprite {
     private int x;
     private int y;
