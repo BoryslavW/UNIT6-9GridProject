@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Grid {
     private Sprite[][] grid = new Sprite[9][9];
 
@@ -78,12 +76,12 @@ public class Grid {
 
     public void movePlayer(int oldX, int oldY, int newX, int newY) {
         grid[oldX][oldY] = new Sprite();
-        grid[newX][newY] = new Player(); // Player moves
+        grid[newX][newY] = new Player();
     }
 
     public void highlight(int x, int y) {
         if (!(grid[x][y] instanceof Enemy) && !(grid[x][y] instanceof Player)) {
-            grid[x][y].setRed(); // Highlight only if not occupied
+            grid[x][y].setRed();
         }
     }
 

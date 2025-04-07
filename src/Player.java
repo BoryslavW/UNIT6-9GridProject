@@ -9,6 +9,8 @@ public class Player extends Sprite {
 
     public void move(String way, Grid grid) {
 
+int oldX = x;
+int oldY = y;
         int newX = x;
         int newY = y;
 
@@ -19,14 +21,15 @@ public class Player extends Sprite {
         if (grid.getSprite(newX, newY).isHighlighted()) {
             alive = false;
         }
+        else {
+            this.unhilight();
+            grid.setHighlighted(oldX, oldY);
+        }
 
         if (newX >= 0 && newX < 9 && newY >= 0 && newY < 9) {
             grid.movePlayer(x, y, newX, newY);
             x = newX;
             y = newY;
-            if (grid.getSprite(newX, newY).isHighlighted()) {
-                alive = false;
-            }
         }
         else {
             System.out.println("Real smart, you stayed still.");

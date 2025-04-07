@@ -11,30 +11,24 @@ public class Enemy extends Sprite {
         this.direction = direction;
     }
 
-    @Override
-    public void setRed() {
-        // turns it into the burning image
-    }
-
     public void highlight(Grid grid) {
-        // For a 9x9 grid with valid indices 0 through 8.
         if (direction == 1) { // Facing downwards
-            for (int i = x + 1; i < 9; i++) {
+            for (int i = x; i < 9; i++) {
                 grid.setHighlighted(i, y);
             }
         }
         if (direction == 2) { // Facing upwards
-            for (int i = x - 1; i >= 0; i--) {
+            for (int i = x; i >= 0; i--) {
                 grid.setHighlighted(i, y);
             }
         }
         if (direction == 3) { // Facing rightwards
-            for (int i = y + 1; i < 9; i++) {
+            for (int i = y; i < 9; i++) {
                 grid.setHighlighted(x, i);
             }
         }
         if (direction == 4) { // Facing leftwards
-            for (int i = y - 1; i >= 0; i--) {
+            for (int i = y; i >= 0; i--) {
                 grid.setHighlighted(x, i);
             }
         }

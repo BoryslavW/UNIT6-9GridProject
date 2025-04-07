@@ -11,6 +11,9 @@ public class Sprite {
         high = true;
         isRed = false;
     }
+    public void unhilight() {
+        high = false;
+    }
 
     public boolean isHighlighted() {
         return high;
