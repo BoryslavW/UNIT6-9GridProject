@@ -1,7 +1,7 @@
 import javax.swing.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public void runGame() {
         Grid grid = new Grid();
         Player player = new Player();
         grid.setPlayer(4, 4, player);
